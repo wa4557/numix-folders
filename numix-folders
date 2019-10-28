@@ -82,6 +82,7 @@ fi
 
 scriptpath=$(dirname "$(readlink -f "$0")")
 
+
 if [ "$runmode" -eq 2 ]; then
     if [ -d /home/"$cuser"/.local/share/icons/Numix/ ]; then
         dir=/home/"$cuser"/.local/share/icons
@@ -90,7 +91,7 @@ if [ "$runmode" -eq 2 ]; then
     elif [ -d /usr/share/icons/Numix/ ]; then
         if [[ $UID -ne 0 ]]; then
             scriptname=$(readlink -f "$0")
-            exec gksudo "$scriptname"
+            exec pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "$scriptname"
         else
             dir=/usr/share/icons
         fi
